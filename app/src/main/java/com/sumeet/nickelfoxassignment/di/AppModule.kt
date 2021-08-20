@@ -11,7 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-private const val BASE_URL = ""
+private const val BASE_URL = "https://www.googleapis.com/youtube/v3/"
 
 @Module
 @InstallIn(SingletonComponent::class)
