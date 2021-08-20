@@ -1,4 +1,4 @@
 # NickelFoxAssignment
 Take Home Assignment for NickelFox
 
-<img src="https://user-images.githubusercontent.com/75352122/130220918-314fb647-7ff5-40ba-919d-a75f1cb3198c.png" width="300">
+<img src="https://user-images.githubusercontent.com/75352122/130221327-a875457a-c85f-476c-b6ad-27b5a417769b.png" width="300">
