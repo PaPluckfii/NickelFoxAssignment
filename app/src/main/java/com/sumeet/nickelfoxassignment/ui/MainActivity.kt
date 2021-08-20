@@ -1,6 +1,5 @@
 package com.sumeet.nickelfoxassignment.ui
 
-import android.R.id
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
@@ -31,16 +30,22 @@ class MainActivity : AppCompatActivity() , OnItemClickListener{
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        someFunc()
+        observeLiveData()
         setUpRecyclerView()
         getResultsFromApi()
     }
 
+    /**
+     * Function to get result from api
+     */
     private fun getResultsFromApi() {
         viewModel.getAllResults()
     }
 
-    private fun someFunc() {
+    /**
+     * Function to observe live data
+     */
+    private fun observeLiveData() {
         viewModel.videoList.observe(this,{
             when(it){
                 is Resource.Success -> {
@@ -63,10 +68,16 @@ class MainActivity : AppCompatActivity() , OnItemClickListener{
         })
     }
 
+    /**
+     * Booleans for pagination
+     */
     var isLoading = false
     var isLastPage = false
     var isScrolling = false
 
+    /**
+     * Scroll listener for pagination
+     */
     val scrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
@@ -108,6 +119,9 @@ class MainActivity : AppCompatActivity() , OnItemClickListener{
         isLoading = true
     }
 
+    /**
+     * Function to setup recyclerview
+     */
     private fun setUpRecyclerView() {
         videosAdapter = VideosAdapter(this)
         binding.recyclerView.apply {
@@ -117,6 +131,9 @@ class MainActivity : AppCompatActivity() , OnItemClickListener{
         }
     }
 
+    /**
+     * Function to handle clicks
+     */
     override fun onItemClicked(url: String) {
         val appIntent = Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:$url"))
         val webIntent = Intent(

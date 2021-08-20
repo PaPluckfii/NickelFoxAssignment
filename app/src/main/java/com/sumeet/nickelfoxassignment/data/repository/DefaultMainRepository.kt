@@ -9,6 +9,9 @@ class DefaultMainRepository @Inject constructor(
     private val apiClient: ApiClient
 ) : MainRepository {
 
+    /**
+     * Function to get response from api
+     */
     override suspend fun getAllResults(
         part: String,
         maxResult: String,

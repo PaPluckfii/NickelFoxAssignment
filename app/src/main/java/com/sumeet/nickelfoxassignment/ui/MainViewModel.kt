@@ -26,6 +26,9 @@ class MainViewModel @Inject constructor(
     var videoListResponse : YoutubeResponse? = null
     var currentPage : String? = null
 
+    /**
+     * Function to get results from api
+     */
     fun getAllResults() {
         viewModelScope.launch(Dispatchers.IO) {
             _videoList.postValue(Resource.Loading())
@@ -39,6 +42,9 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Function to wrap the api response in Resource class
+     */
     private fun handleApiResponse(response : Response<YoutubeResponse>) : Resource<YoutubeResponse>{
         if(response.isSuccessful && response.body() != null){
             currentPage = response.body()!!.nextPageToken ?: "no pages left"

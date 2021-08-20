@@ -27,6 +27,9 @@ class VideosAdapter(private val onItemClickListener: OnItemClickListener) : Recy
         }
     }
 
+    /**
+     * Diff Util Callback to compare old and new list
+     */
     private val differCallback = object : DiffUtil.ItemCallback<Item>() {
         override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
             return oldItem.id?.videoId == oldItem.id?.videoId
