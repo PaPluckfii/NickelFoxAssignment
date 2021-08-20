@@ -11,6 +11,8 @@ interface ApiClient {
     @GET("search")
     suspend fun getAllResults(
         @Query("part") part : String,
+        @Query("maxResults") maxResult : String,
+        @Query("pageToken") pageToken : String?,
         @Query("key") accessKey : String
     ) : Response<YoutubeResponse>
 

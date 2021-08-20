@@ -8,20 +8,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sumeet.nickelfoxassignment.data.remote.model.Item
 import com.sumeet.nickelfoxassignment.databinding.ItemVideoPreviewBinding
+import com.sumeet.nickelfoxassignment.util.OnItemClickListener
 
-class VideosAdapter() : RecyclerView.Adapter<VideosAdapter.VideosViewHolder>() {
+class VideosAdapter(private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<VideosAdapter.VideosViewHolder>() {
 
     inner class VideosViewHolder(private val binding: ItemVideoPreviewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun setData(item: Item?) {
             binding.apply {
-                Glide.with(this.root).load(item?.snippet?.thumbnails?.default)
-                dummyText.text = item?.snippet?.title
-                this.root.setOnClickListener {
-                    onItemClickListener?.let {
-                        it(item!!)
-                    }
-                }
+                tvTitle.text = item?.snippet?.title
+                tvChannel.text = item?.snippet?.channelTitle
+            }
+            Glide.with(binding.root).load(item?.snippet?.thumbnails?.high?.url).into(binding.ivThumbnail)
+            Glide.with(binding.root).load(item?.snippet?.thumbnails?.default?.url).into(binding.ivChannelPic)
+            binding.root.setOnClickListener{
+                item?.id?.videoId?.let { it1 -> onItemClickListener.onItemClicked(it1) }
             }
         }
     }
@@ -54,12 +55,6 @@ class VideosAdapter() : RecyclerView.Adapter<VideosAdapter.VideosViewHolder>() {
 
     override fun getItemCount(): Int {
         return differ.currentList.size
-    }
-
-    private var onItemClickListener: ((Item) -> Unit)? = null
-
-    fun setOnItemClickListener(listener: (Item) -> Unit) {
-        onItemClickListener = listener
     }
 
 }
